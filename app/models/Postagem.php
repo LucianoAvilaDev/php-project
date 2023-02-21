@@ -1,23 +1,25 @@
 <?php
 
-    class Postagem{
-        public static function selecionarTodos(){
-            $conn = Connection::getConnection();
+require_once 'app/lib/database/Connection.php';
 
-            $sql = "SELECT * FROM postagem ORDER BY id DESC";
-            $sql = $conn->prepare($sql);
-            $sql->execute();
+class Postagem{
+    public static function selecionarTodos(){
+        $conn = Connection::getConnection();
 
-            $resultado = array();
+        $sql = "SELECT * FROM postagem ORDER BY id DESC";
+        $sql = $conn->prepare($sql);
+        $sql->execute();
 
-            while($row = $sql->fetchObject('Postagem')){
-                $resultado[] = $row;
-            }
+        $resultado = array();
 
-            if(!$resultado){
-                throw new Exception('Nenhum resultado encontrado!');
-            }
+        while($row = $sql->fetchObject('Postagem')){
+            $resultado[] = $row;
+        }
 
-            return $resultado;
-        } 
-    }
+        if(!$resultado){
+            throw new Exception('Nenhum resultado encontrado!');
+        }
+
+        return $resultado;
+    } 
+}
