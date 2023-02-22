@@ -74,8 +74,6 @@ class Postagem
             throw new Exception('Preencha todos os campos');
         }
 
-        echo ($dadosPost['id']);
-
         $conn = Connection::getConnection();
         $sql = 'UPDATE postagem SET titulo = :titulo, conteudo = :conteudo WHERE id = :id';
         $sql = $conn->prepare($sql);
@@ -92,5 +90,21 @@ class Postagem
 
         return true;
 
+    }
+
+    public static function delete($id)
+    {
+        $conn = Connection::getConnection();
+        $sql = 'DELETE FROM postagem WHERE id = :id';
+        $sql = $conn->prepare($sql);
+
+        $sql->bindValue(':id', $id);
+        $res = $sql->execute();
+
+        if ($res == 0) {
+            throw new Exception('Falha ao deletar dados');
+        }
+
+        return true;
     }
 }

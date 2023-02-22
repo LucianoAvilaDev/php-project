@@ -67,7 +67,6 @@ class AdminController
     public function update()
     {
         try {
-            var_dump($_POST);
             Postagem::update($_POST);
             echo '<script>alert("Publicação alterada com sucesso!")</script>';
             echo '<script>location.href="?pagina=admin&metodo=index"</script>';
@@ -76,4 +75,28 @@ class AdminController
             echo '<script>location.href="?pagina=admin&metodo=change&id={{ $_POST["id"] }}</script>';
         }
     }
+
+    public function delete($params)
+    {
+        try {
+            Postagem::delete($params['id']);
+            echo '<script>alert("Publicação deletada com sucesso!")</script>';
+            echo '<script>location.href="?pagina=admin&metodo=index"</script>';
+        } catch (Exception $e) {
+            echo '<script>alert("' . $e->getMessage() . '")</script>';
+            echo '<script>location.href="?pagina=admin&metodo=index"</script>';
+        }
+    }
+
+    public function addComentario()
+    {
+        try {
+            Comentario::insert($_POST);
+            header('Location:?pagina=post&id=' . $_POST["id"] . '');
+        } catch (Exception $e) {
+            echo '<script>alert("' . $e->getMessage() . '")</script>';
+            echo '<script>location.href="?pagina=admin&metodo=change&id={{ $_POST["id"] }}</script>';
+        }
+    }
+
 }

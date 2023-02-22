@@ -15,6 +15,7 @@ class PostController
             $template = $twig->load('single.html');
 
             $parametros = array();
+            $parametros['id'] = $postagem->id;
             $parametros['titulo'] = $postagem->titulo;
             $parametros['conteudo'] = $postagem->conteudo;
             $parametros['comentarios'] = $postagem->comentarios;

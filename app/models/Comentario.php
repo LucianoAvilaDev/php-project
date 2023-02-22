@@ -20,4 +20,29 @@ class Comentario
         return $resultado;
     }
 
+    public static function insert($data)
+    {
+        $conn = Connection::getConnection();
+
+        $postagem_id = $data['id'];
+        $nome = $data['nome'];
+        $mensagem = $data['mensagem'];
+
+
+        $sql = "INSERT INTO comentario (nome, mensagem, postagem_id) VALUES (:nome, :mensagem, :postagem_id)";
+        $sql = $conn->prepare($sql);
+
+        $sql->bindValue(':nome', $nome);
+        $sql->bindValue(':mensagem', $mensagem);
+        $sql->bindValue(':postagem_id', $postagem_id, PDO::PARAM_INT);
+
+        $res = $sql->execute();
+
+        if ($res == 0) {
+            throw new Exception('Falha ao inserir dados');
+        }
+
+        return true;
+    }
+
 }
