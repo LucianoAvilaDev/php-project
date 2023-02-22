@@ -6,6 +6,9 @@ class Core
     {
 
         $acao = 'index';
+        if (isset($urlGet['pagina'])) {
+            $acao = $urlGet['metodo'];
+        }
 
         if (isset($urlGet['pagina'])) {
             $controller = ucfirst($urlGet['pagina'] . 'Controller');
