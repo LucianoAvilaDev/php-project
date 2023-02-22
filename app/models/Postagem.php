@@ -1,6 +1,7 @@
 <?php
 
 require_once 'app/lib/database/Connection.php';
+require_once 'app/models/Comentario.php';
 
 class Postagem
 {
@@ -38,6 +39,8 @@ class Postagem
 
         if (!$resultado) {
             throw new Exception('Nenhum resultado encontrado!');
+        } else {
+            $resultado->comentarios = Comentario::selecionarComentários($resultado->id);
         }
 
         return $resultado;
