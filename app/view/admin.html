@@ -14,7 +14,7 @@
         <tr>
             <td>{{ postagem.id }}</td>
             <td>{{ postagem.titulo }}</td>
-            <td>EDITAR</td>
+            <td><a href="?pagina=admin&metodo=change&id={{ postagem.id }}">EDITAR</a></td>
             <td>DELETAR</td>
         </tr>
     {% endfor %}

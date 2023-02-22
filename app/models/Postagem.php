@@ -65,5 +65,32 @@ class Postagem
             throw new Exception('Falha ao inserir dados');
         }
 
+        return true;
+    }
+
+    public static function update($dadosPost)
+    {
+        if (empty($dadosPost['titulo']) or empty($dadosPost['conteudo'])) {
+            throw new Exception('Preencha todos os campos');
+        }
+
+        echo ($dadosPost['id']);
+
+        $conn = Connection::getConnection();
+        $sql = 'UPDATE postagem SET titulo = :titulo, conteudo = :conteudo WHERE id = :id';
+        $sql = $conn->prepare($sql);
+
+        $sql->bindValue(':titulo', $dadosPost['titulo']);
+        $sql->bindValue(':conteudo', $dadosPost['conteudo']);
+        $sql->bindValue(':id', $dadosPost['id']);
+
+        $res = $sql->execute();
+
+        if ($res == 0) {
+            throw new Exception('Falha ao alterar dados');
+        }
+
+        return true;
+
     }
 }

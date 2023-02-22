@@ -44,4 +44,36 @@ class AdminController
             echo '<script>location.href="?pagina=admin&metodo=create"</script>';
         }
     }
+
+    public function change($params)
+    {
+        $postagem = Postagem::selecionaPorId($params['id']);
+
+        $loader = new \Twig\Loader\FilesystemLoader('./app/view');
+        $twig = new \Twig\Environment($loader);
+        $template = $twig->load('update.html');
+
+        $parametros = array();
+
+        $parametros = array();
+        $parametros['titulo'] = $postagem->titulo;
+        $parametros['conteudo'] = $postagem->conteudo;
+        $parametros['id'] = $postagem->id;
+
+        $conteudo = $template->render($parametros);
+        echo $conteudo;
+    }
+
+    public function update()
+    {
+        try {
+            var_dump($_POST);
+            Postagem::update($_POST);
+            echo '<script>alert("Publicação alterada com sucesso!")</script>';
+            echo '<script>location.href="?pagina=admin&metodo=index"</script>';
+        } catch (Exception $e) {
+            echo '<script>alert("' . $e->getMessage() . '")</script>';
+            echo '<script>location.href="?pagina=admin&metodo=change&id={{ $_POST["id"] }}</script>';
+        }
+    }
 }
