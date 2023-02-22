@@ -6,7 +6,8 @@ class Core
     {
 
         $acao = 'index';
-        if (isset($urlGet['pagina'])) {
+
+        if (isset($urlGet['metodo'])) {
             $acao = $urlGet['metodo'];
         }
 

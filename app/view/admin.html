@@ -10,5 +10,12 @@
         <th>EDITAR</th>
         <th>DELETAR</th>
     </tr>
-    
+    {% for postagem in postagens %}
+        <tr>
+            <td>{{ postagem.id }}</td>
+            <td>{{ postagem.titulo }}</td>
+            <td>EDITAR</td>
+            <td>DELETAR</td>
+        </tr>
+    {% endfor %}
 </table>
