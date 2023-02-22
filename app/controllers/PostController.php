@@ -1,21 +1,22 @@
 <?php
 
 require_once 'app/models/Postagem.php';
+require_once 'app/lib/database/Connection.php';
 
-class HomeController
+class PostController
 {
-    public function index()
+    public function index($params)
     {
         try {
-            $postagens = Postagem::selecionarTodos();
+            $postagem = Postagem::selecionaPorId($params['id']);
 
             $loader = new \Twig\Loader\FilesystemLoader('./app/view');
             $twig = new \Twig\Environment($loader);
-
-            $template = $twig->load('home.html');
+            $template = $twig->load('single.html');
 
             $parametros = array();
-            $parametros['postagens'] = $postagens;
+            $parametros['titulo'] = $postagem->titulo;
+            $parametros['conteudo'] = $postagem->conteudo;
 
             $conteudo = $template->render($parametros);
 
@@ -24,4 +25,6 @@ class HomeController
             echo $e->getMessage();
         }
     }
+
+
 }
