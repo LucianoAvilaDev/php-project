@@ -19,10 +19,6 @@ class Postagem
             $resultado[] = $row;
         }
 
-        if (!$resultado) {
-            throw new Exception('Nenhum resultado encontrado!');
-        }
-
         return $resultado;
     }
 
@@ -94,7 +90,10 @@ class Postagem
 
     public static function delete($id)
     {
+        Comentario::deletarComentarios($id);
+
         $conn = Connection::getConnection();
+
         $sql = 'DELETE FROM postagem WHERE id = :id';
         $sql = $conn->prepare($sql);
 

@@ -3,19 +3,23 @@
 <a href="?pagina=admin&metodo=create">Criar publicação</a>
 <hr>
 <br>
-<table border="2" >
-    <tr>
-        <th>ID</th>
-        <th>TÍTULO</th>
-        <th>EDITAR</th>
-        <th>DELETAR</th>
-    </tr>
-    {% for postagem in postagens %}
-        <tr>
-            <td>{{ postagem.id }}</td>
-            <td>{{ postagem.titulo }}</td>
-            <td><a href="?pagina=admin&metodo=change&id={{ postagem.id }}">EDITAR</a></td>
-            <td><a href="?pagina=admin&metodo=delete&id={{ postagem.id }}">DELETAR</a></td>
-        </tr>
-    {% endfor %}
-</table>
+    {% if postagens == [] %}
+        <p>Nenhuma postagem encontrada!</p>
+    {% else %}
+        <table border="2" >
+            <tr>
+                <th>ID</th>
+                <th>TÍTULO</th>
+                <th>EDITAR</th>
+                <th>DELETAR</th>
+            </tr>
+            {% for postagem in postagens %}
+                <tr>
+                    <td>{{ postagem.id }}</td>
+                    <td>{{ postagem.titulo }}</td>
+                    <td><a href="?pagina=admin&metodo=change&id={{ postagem.id }}">EDITAR</a></td>
+                    <td><a href="?pagina=admin&metodo=delete&id={{ postagem.id }}">DELETAR</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}

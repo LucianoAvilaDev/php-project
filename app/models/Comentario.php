@@ -45,4 +45,20 @@ class Comentario
         return true;
     }
 
+    public static function deletarComentarios($postId)
+    {
+        $conn = Connection::getConnection();
+        $sql = 'DELETE FROM comentario WHERE postagem_id = :id';
+        $sql = $conn->prepare($sql);
+
+        $sql->bindValue(':id', $postId);
+        $res = $sql->execute();
+
+        if ($res == 0) {
+            throw new Exception('Falha ao deletar dados');
+        }
+
+        return true;
+    }
+
 }
