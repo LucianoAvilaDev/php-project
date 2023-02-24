@@ -1,8 +1,6 @@
 # PHP Posts & Coments
-
 Projeto de postagens e comentários com única finalidade de estudo do PHP puro em nível básico.
-
-
+Como o foco é PHP, o CSS não está refinado.
 ## Linguagens:
 - PHP;
 - HTML;
